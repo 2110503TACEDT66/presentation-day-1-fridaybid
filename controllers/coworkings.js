@@ -81,7 +81,7 @@ exports.getCoworking=async(req,res,next)=>{
         const coworking = await Coworking.findById(req.params.id);
 
         if(!coworking){
-            return res.status(400).json({success:false});
+            return res.status(400).json({success:false, message: 'There is no Co-working Space'});
         }
         res.status(200).json({success:true, data: coworking});
 
@@ -110,7 +110,7 @@ exports.updateCoworking = async(req,res,next)=>{
         });
 
         if(!coworking){
-            return res.status(400).json({success: false});
+            return res.status(400).json({success: false, message: 'There is no Co-working Space'});
         }
 
         res.status(200).json({success: true, data: coworking});

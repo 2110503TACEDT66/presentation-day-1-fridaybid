@@ -23,8 +23,8 @@ exports.register = async(req,res,next)=>{
 
         sendTokenResponse(user, 201, res);
     } catch(err){
-        res.status(400).json({success: false});
         console.log(err.stack);
+        return res.status(400).json({success: false});
     }
 }
 
@@ -78,7 +78,7 @@ const sendTokenResponse = (user, statusCode, res)=>{
     if(process.env.NODE_ENV === 'production'){
         options.secure = true;
     }
-    res.status(statusCode).cookie('token', token, options).json({
+    return res.status(statusCode).cookie('token', token, options).json({
         success: true,
         token
     })
@@ -90,7 +90,7 @@ const sendTokenResponse = (user, statusCode, res)=>{
 //@access   Private
 exports.getMe = async(req, res, next)=>{
     const user = await User.findById(req.user.id);
-    res.status(200).json({success: true, data: user});
+    return res.status(200).json({success: true, data: user});
 };
 
 //@desc Logout user/ clear cookie
@@ -101,7 +101,7 @@ exports.logout = async (req, res, next) => {
         expires: new Date(Date.now()+ 10*1000),
         httpOnly: true
     });
-    res.status(200).json({
+    return res.status(200).json({
         success: true,
         data:{}
     });

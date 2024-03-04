@@ -65,7 +65,7 @@ exports.updateUser = async (req, res, next) => {
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ success: false, message: "Cannot update user" });
+      return res.status(500).json({ success: false, message: "Cannot update user" });
     }
   };
   
@@ -93,7 +93,7 @@ exports.deleteUser = async (req, res, next) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Cannot delete user" });
+    return res.status(500).json({ success: false, message: "Cannot delete user" });
   }
 };
 
