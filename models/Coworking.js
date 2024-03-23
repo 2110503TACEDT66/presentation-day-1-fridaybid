@@ -20,6 +20,9 @@ const CoworkingSchema = new mongoose.Schema({
     },
     closeTime:{
         type: String
+    },
+    picture : { 
+        type: String
     }
 },{
     toJSON: {virtuals: true},
